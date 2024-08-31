@@ -1,0 +1,1 @@
+equivalent to outerHTML, the element will be swapped inline

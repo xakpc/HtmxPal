@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
+    <Metadata>
+        <Identity Id="Xakpc.VisualStudio.Extensions.HtmxPal.1c639a19-278c-4234-9b63-bc96ec0dec69" Version="1.0" Language="en-US" Publisher="Pavel Osadchuk" />
+        <DisplayName>HtmxPal</DisplayName>
+        <Description xml:space="preserve">HTMX Developer Tools
+
+Enhance your HTMX development workflow with advanced code completion and quick information features. This extension augments Visual Studio Code with:
+
+- Intelligent autocompletion for HTMX attributes and values
+- Contextual quick info tooltips for HTMX syntax
+- Adaptive suggestions based on document structure
+
+Optimize your development process and craft HTMX-powered applications with increased efficiency. Suitable for developers at all proficiency levels working with HTMX technology.</Description>
+        <Icon>Resources\HtmxIcon.png</Icon>
+        <PreviewImage>Resources\HtmxIcon.png</PreviewImage>
+        <Tags>razor,htmx</Tags>
+    </Metadata>
+    <Installation>
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 18.0)">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Pro">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+        <InstallationTarget Version="[16.0,18.0)" Id="Microsoft.VisualStudio.Enterprise">
+            <ProductArchitecture>amd64</ProductArchitecture>
+        </InstallationTarget>
+    </Installation>
+    <Dependencies>
+        <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
+    </Dependencies>
+    <Prerequisites>
+        <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[17.0,18.0)" DisplayName="Visual Studio core editor" />
+    </Prerequisites>
+    <Assets>
+        <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
+        <Asset Type="Microsoft.VisualStudio.MefComponent" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" />
+    </Assets>
+</PackageManifest>

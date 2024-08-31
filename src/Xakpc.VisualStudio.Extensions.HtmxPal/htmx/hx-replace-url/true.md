@@ -1,0 +1,1 @@
+replace the fetched URL in the browser navigation bar
