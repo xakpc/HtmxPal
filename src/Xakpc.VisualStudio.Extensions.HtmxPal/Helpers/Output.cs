@@ -92,7 +92,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
         /// Gets the output window pane asynchronously.
         /// </summary>
         /// <returns>The output window pane.</returns>
-        public static async Task<IVsOutputWindowPane> GetOutputPaneAsync()
+        private static async Task<IVsOutputWindowPane> GetOutputPaneAsync()
         {
             if (!ThreadHelper.CheckAccess())
             {

@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.Core.Imaging;
 using Microsoft.VisualStudio.Imaging;
-using Microsoft.VisualStudio.Imaging.Interop;
-using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion;
 using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using Microsoft.VisualStudio.Language.StandardClassification;
@@ -12,7 +10,6 @@ using Microsoft.VisualStudio.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.ComponentModel.Composition;
-using System.Configuration;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,22 +21,19 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     /// Provides completion items for htmx attributes.
     /// </summary>
     [Export(typeof(IAsyncCompletionSourceProvider))]
-    [Name("Htmx completion item source")]
+    [Name("htmx completion source")]
     [ContentType("html")]
-    [ContentType("htmlx")] // .html
-    [ContentType("Razor")] // .cshtml
+    [ContentType("htmlx")]
+    [ContentType("Razor")]
     internal class HtmxCompletionSourceProvider : IAsyncCompletionSourceProvider
     {
-        private readonly Lazy<HtmxCompletionSource> Source;
+        private readonly Lazy<HtmxCompletionSource> Source = new Lazy<HtmxCompletionSource>(() => new HtmxCompletionSource());
 
-        [Import]
-        IAsyncCompletionBroker AsyncCompletionBroker { get;set;}
-
-        public HtmxCompletionSourceProvider()
-        {
-            Source = new Lazy<HtmxCompletionSource>(() => new HtmxCompletionSource(AsyncCompletionBroker));
-        }
-
+        /// <summary>
+        /// Gets or creates an instance of <see cref="HtmxCompletionSource"/>.
+        /// </summary>
+        /// <param name="textView">The text view for which the completion source is requested.</param>
+        /// <returns>An instance of <see cref="HtmxCompletionSource"/>.</returns>
         public IAsyncCompletionSource GetOrCreate(ITextView textView)
         {
             Output.WriteInfo("HtmxCompletionSourceProvider:GetOrCreate: got a request for a source.");
@@ -48,7 +42,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     }
 
     /// <summary>
-    ///  
+    /// Provides completion items and descriptions for htmx attributes.
     /// </summary>
     internal class HtmxCompletionSource : IAsyncCompletionSource
     {
@@ -58,26 +52,16 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
 
         // Icon
         private static ImageElement CompletionItemIcon = new ImageElement(KnownMonikers.HTMLEndTag.ToImageId(), "htmx");
-        private IAsyncCompletionBroker _asyncCompletionBroker;
 
-        public HtmxCompletionSource(IAsyncCompletionBroker asyncCompletionBroker)
-        {
-            _asyncCompletionBroker = asyncCompletionBroker;
-            _asyncCompletionBroker.CompletionTriggered += OnAsyncCompletionSessionStarted;
-        }
-
-        public void Dispose()
-        {
-            _asyncCompletionBroker.CompletionTriggered -= OnAsyncCompletionSessionStarted;
-        }
-
-        private void OnAsyncCompletionSessionStarted(object sender, CompletionTriggeredEventArgs e)
-        {
-            var sessions = _asyncCompletionBroker.GetSession(e.TextView);
-            
-            Output.WriteInfo($"HtmxCompletionSource:OnAsyncCompletionSessionStarted: got a request for a session. Returning {sessions} sessions.");
-        }
-
+        /// <summary>
+        /// Asynchronously gets the completion context.
+        /// </summary>
+        /// <param name="session">The completion session.</param>
+        /// <param name="trigger">The completion trigger.</param>
+        /// <param name="triggerLocation">The location where the trigger occurred.</param>
+        /// <param name="applicableToSpan">The span to which the completion is applicable.</param>
+        /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the completion context.</returns>
         public Task<CompletionContext> GetCompletionContextAsync(IAsyncCompletionSession session, CompletionTrigger trigger, SnapshotPoint triggerLocation, SnapshotSpan applicableToSpan, CancellationToken cancellationToken)
         {
             var arr = ToolTipsProvider.Instance.Keywords.Select(ConvertToItem).ToImmutableArray();
@@ -87,26 +71,18 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return Task.FromResult(new CompletionContext(arr));
         }
 
-        private CompletionItem ConvertToItem(string text)
-        {
-            string insertText = text == "hx-on" ? $"hx-on:" : $"{text}=\"\"";
-            return new CompletionItem(
-                            text,
-                            insertText: insertText,
-                            sortText: text,
-                            filterText: text,
-                            automationText: text,
-                            source: this,
-                            filters: Filters,
-                            icon: CompletionItemIcon,
-                            suffix: default,
-                            attributeIcons: ImmutableArray<ImageElement>.Empty);
-        }
-
+        /// <summary>
+        /// Asynchronously gets the description for a completion item.
+        /// </summary>
+        /// <param name="session">The completion session.</param>
+        /// <param name="item">The completion item.</param>
+        /// <param name="token">A token to monitor for cancellation requests.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the description of the completion item.</returns>
         public Task<object> GetDescriptionAsync(IAsyncCompletionSession session, CompletionItem item, CancellationToken token)
         {
             if (ToolTipsProvider.Instance.TryGetValue(item.DisplayText, out var element, false))
             {
+                // add some spacing between text paragraphs (should really cache that as well)
                 var elements = element.Elements.ToList();
                 var newElements = new object[elements.Count * 2 - 1];
                 for (int i = 0; i < elements.Count; i++)
@@ -124,6 +100,13 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return Task.FromResult<object>(null);
         }
 
+        /// <summary>
+        /// Initializes the completion process.
+        /// </summary>
+        /// <param name="trigger">The completion trigger.</param>
+        /// <param name="triggerLocation">The location where the trigger occurred.</param>
+        /// <param name="cancellationToken">A token to monitor for cancellation requests.</param>
+        /// <returns>The data that indicates whether the completion should participate.</returns>
         public CompletionStartData InitializeCompletion(CompletionTrigger trigger, SnapshotPoint triggerLocation, CancellationToken cancellationToken)
         {
             Output.WriteInfo($"HtmxCompletionSource:InitializeCompletion: triggered by {trigger.Reason}:{trigger.Character}.");
@@ -144,6 +127,27 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             }
 
             return CompletionStartData.DoesNotParticipateInCompletion;
-        }        
-    }   
+        }
+
+        /// <summary>
+        /// Converts a keyword to a completion item.
+        /// </summary>
+        /// <param name="text">The keyword text.</param>
+        /// <returns>A completion item for the keyword.</returns>
+        private CompletionItem ConvertToItem(string text)
+        {
+            string insertText = text == "hx-on" ? $"hx-on:" : $"{text}=\"\"";
+            return new CompletionItem(
+                            text,
+                            insertText: insertText,
+                            sortText: text,
+                            filterText: text,
+                            automationText: text,
+                            source: this,
+                            filters: Filters,
+                            icon: CompletionItemIcon,
+                            suffix: default,
+                            attributeIcons: ImmutableArray<ImageElement>.Empty);
+        }
+    }
 }

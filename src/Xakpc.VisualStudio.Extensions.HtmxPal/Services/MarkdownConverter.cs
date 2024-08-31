@@ -5,8 +5,16 @@ using System.Text;
 
 namespace Xakpc.VisualStudio.Extensions.HtmxPal
 {
+    /// <summary>
+    /// Converts Markdown text into a list of ContainerElement objects for display in Visual Studio.
+    /// </summary>
     internal class MarkdownConverter
     {
+        /// <summary>
+        /// Converts the given Markdown string into a list of ContainerElement objects.
+        /// </summary>
+        /// <param name="markdown">The Markdown string to convert.</param>
+        /// <returns>A list of ContainerElement objects representing the converted Markdown.</returns>
         public List<ContainerElement> Convert(string markdown)
         {
             var containers = new List<ContainerElement>();
@@ -62,6 +70,11 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return containers;
         }
 
+        /// <summary>
+        /// Processes a line of Markdown text and converts it into a ClassifiedTextElement with appropriate styling.
+        /// </summary>
+        /// <param name="line">The line of Markdown text to process.</param>
+        /// <returns>A ClassifiedTextElement representing the processed line.</returns>
         private ClassifiedTextElement ProcessInlineElements(string line)
         {
             var runs = new List<ClassifiedTextRun>();

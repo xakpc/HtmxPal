@@ -2,8 +2,17 @@
 
 namespace Xakpc.VisualStudio.Extensions.HtmxPal
 {
+    /// <summary>
+    /// Provides extension methods for <see cref="SnapshotPoint"/>.
+    /// </summary>
     internal static class SnapshotPointExtensions
     {
+        /// <summary>
+        /// Determines whether the specified <see cref="SnapshotPoint"/> is inside an "hx-" attribute.
+        /// </summary>
+        /// <param name="point">The snapshot point.</param>
+        /// <param name="attribute">The attribute name if the point is inside an "hx-" attribute; otherwise, null.</param>
+        /// <returns><c>true</c> if the point is inside an "hx-" attribute; otherwise, <c>false</c>.</returns>
         public static bool IsInsideHxAttribute(this SnapshotPoint point, out string attribute)
         {
             attribute = null;
@@ -39,6 +48,11 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return false;
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="SnapshotPoint"/> is inside an HTML tag.
+        /// </summary>
+        /// <param name="point">The snapshot point.</param>
+        /// <returns><c>true</c> if the point is inside an HTML tag; otherwise, <c>false</c>.</returns>
         public static bool IsInsideHtmlTag(this SnapshotPoint point)
         {
             var snapshot = point.Snapshot;
@@ -65,6 +79,11 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return openBracketPos != -1;
         }
 
+        /// <summary>
+        /// Gets the token containing the specified <see cref="SnapshotPoint"/>.
+        /// </summary>
+        /// <param name="point">The snapshot point.</param>
+        /// <returns>A <see cref="SnapshotSpan"/> representing the containing token.</returns>
         public static SnapshotSpan GetContainingToken(this SnapshotPoint point)
         {
             var line = point.GetContainingLine();
@@ -87,6 +106,11 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return new SnapshotSpan(line.Snapshot, tokenStart, tokenEnd - tokenStart);
         }
 
+        /// <summary>
+        /// Gets the previous token relative to the specified <see cref="SnapshotSpan"/>.
+        /// </summary>
+        /// <param name="tokenSpan">The token span.</param>
+        /// <returns>A <see cref="SnapshotSpan"/> representing the previous token.</returns>
         public static SnapshotSpan GetPreviousToken(this SnapshotSpan tokenSpan)
         {
             var line = tokenSpan.Start.GetContainingLine();
@@ -108,6 +132,11 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return new SnapshotSpan(line.Snapshot, line.Start + previousTokenStart, previousTokenEnd - previousTokenStart);
         }
 
+        /// <summary>
+        /// Determines whether the specified character is a valid token character.
+        /// </summary>
+        /// <param name="c">The character.</param>
+        /// <returns><c>true</c> if the character is a valid token character; otherwise, <c>false</c>.</returns>
         private static bool IsValidTokenChar(char c)
         {
             return char.IsLetterOrDigit(c) || c == '-';

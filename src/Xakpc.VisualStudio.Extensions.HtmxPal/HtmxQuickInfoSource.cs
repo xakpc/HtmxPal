@@ -12,44 +12,60 @@ using Xakpc.VisualStudio.Extensions.HtmxPal.Services;
 
 namespace Xakpc.VisualStudio.Extensions.HtmxPal
 {
+    /// <summary>
+    /// Provides a source for QuickInfo tooltips for HTML, HTMLX, and Razor content types.
+    /// </summary>
     [Export(typeof(IAsyncQuickInfoSourceProvider))]
-    [Name("Htmx ToolTip QuickInfo Source")]
-    [Order(Before = "Default Quick Info Presenter")]
+    [Name("htmx tooltip quickInfo source")]
     [ContentType("html")]
-    [ContentType("htmlx")] // .html
-    [ContentType("razor")] // .cshtml
+    [ContentType("htmlx")]
+    [ContentType("razor")]    
     internal class HtmxQuickInfoSourceProvider : IAsyncQuickInfoSourceProvider
     {
         [Import]
         internal ITextStructureNavigatorSelectorService NavigatorService { get; set; }
 
-        [Import]
-        internal ITextBufferFactoryService TextBufferFactoryService { get; set; }
-
+        /// <summary>
+        /// Tries to create a QuickInfo source for the given text buffer.
+        /// </summary>
+        /// <param name="textBuffer">The text buffer for which to create the QuickInfo source.</param>
+        /// <returns>An instance of <see cref="IAsyncQuickInfoSource"/>.</returns>
         public IAsyncQuickInfoSource TryCreateQuickInfoSource(ITextBuffer textBuffer)
-        {
+        {            
             Output.WriteInfo("HtmxQuickInfoSourceProvider:TryCreateQuickInfoSource: got a request for a source.");
-
-            return new HtmxQuickInfoSource(this, textBuffer);
+            return new HtmxQuickInfoSource(NavigatorService, textBuffer);
         }
     }
 
+    /// <summary>
+    /// Provides QuickInfo tooltips for HTML, HTMLX, and Razor content types.
+    /// </summary>
     internal class HtmxQuickInfoSource : IAsyncQuickInfoSource
     {
-        private HtmxQuickInfoSourceProvider _provider;
+        private ITextStructureNavigatorSelectorService _navigator;
         private ITextBuffer _subjectBuffer;
-        
         private bool _isDisposed;
 
-        public HtmxQuickInfoSource(HtmxQuickInfoSourceProvider provider, ITextBuffer subjectBuffer)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HtmxQuickInfoSource"/> class.
+        /// </summary>
+        /// <param name="navigator">The text structure navigator selector service.</param>
+        /// <param name="subjectBuffer">The text buffer for which to provide QuickInfo.</param>
+        public HtmxQuickInfoSource(ITextStructureNavigatorSelectorService navigator, ITextBuffer subjectBuffer)
         {
-            _provider = provider;
+            _navigator = navigator;
             _subjectBuffer = subjectBuffer;
         }
 
+        /// <summary>
+        /// Asynchronously gets the QuickInfo item for the specified session.
+        /// </summary>
+        /// <param name="session">The QuickInfo session.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains the QuickInfo item.</returns>
         public async Task<QuickInfoItem> GetQuickInfoItemAsync(IAsyncQuickInfoSession session, CancellationToken cancellationToken)
         {
-            var (containerElement, applicableToSpan) = await AugmentQuickInfoSessionAsync(session, cancellationToken);
+            var (containerElement, applicableToSpan) = await BuildQuickInfoElementsAsync(session, cancellationToken);
 
             if (containerElement != null && applicableToSpan != null)
             {
@@ -59,6 +75,9 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return null;
         }
 
+        /// <summary>
+        /// Disposes the QuickInfo source.
+        /// </summary>
         public void Dispose()
         {
             if (!_isDisposed)
@@ -68,7 +87,13 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             }
         }
 
-        private async ValueTask<(ContainerElement, ITrackingSpan applicableToSpan)> AugmentQuickInfoSessionAsync(IAsyncQuickInfoSession session, CancellationToken cancellationToken)
+        /// <summary>
+        /// Asynchronously builds the QuickInfo elements for the specified session.
+        /// </summary>
+        /// <param name="session">The QuickInfo session.</param>
+        /// <param name="cancellationToken">A cancellation token.</param>
+        /// <returns>A task that represents the asynchronous operation. The task result contains a tuple with the container element and the applicable span.</returns>
+        private async ValueTask<(ContainerElement, ITrackingSpan applicableToSpan)> BuildQuickInfoElementsAsync(IAsyncQuickInfoSession session, CancellationToken cancellationToken)
         {
             // Map the trigger point down to our buffer.
             SnapshotPoint? subjectTriggerPoint = session.GetTriggerPoint(_subjectBuffer.CurrentSnapshot);
@@ -78,7 +103,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             }
 
             var currentSnapshot = subjectTriggerPoint.Value.Snapshot;
-            var navigator = _provider.NavigatorService.GetTextStructureNavigator(_subjectBuffer);
+            var navigator = _navigator.GetTextStructureNavigator(_subjectBuffer);
             var extent = navigator.GetExtentOfWord(subjectTriggerPoint.Value);
 
             // extract full hx- attribute text
@@ -104,6 +129,11 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return (null, null);
         }
 
+        /// <summary>
+        /// Gets the attribute text at the specified trigger point.
+        /// </summary>
+        /// <param name="subjectTriggerPoint">The trigger point.</param>
+        /// <returns>The attribute text.</returns>
         private string GetAttributeText(SnapshotPoint subjectTriggerPoint)
         {
             SnapshotPoint start = subjectTriggerPoint;
@@ -141,7 +171,12 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             return sb.ToString();
         }
 
-
+        /// <summary>
+        /// Determines whether the character at the specified point is a valid attribute character.
+        /// </summary>
+        /// <param name="point">The snapshot point.</param>
+        /// <param name="c">The character at the point.</param>
+        /// <returns><c>true</c> if the character is a valid attribute character; otherwise, <c>false</c>.</returns>
         private bool IsValidAttributeChar(SnapshotPoint point, out char c)
         {
             c = point.GetChar();
