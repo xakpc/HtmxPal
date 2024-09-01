@@ -3,7 +3,7 @@
 
 <div align="center">
   
-[![GitHub Actions Workflow Status][actions-shield]][actions-url]
+<!-- [![GitHub Actions Workflow Status][actions-shield]][actions-url]-->
 [![Stargazers][stars-shield]][stars-url]
 [![MIT License][license-shield]][license-url]
 [![VS Marketplace Downloads][vsm-shield]][vsm-url]
