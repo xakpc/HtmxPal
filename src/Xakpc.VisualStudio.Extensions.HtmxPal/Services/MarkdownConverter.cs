@@ -1,5 +1,7 @@
 ﻿using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text.Adornments;
+using Microsoft.VisualStudio.Text.Editor;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,7 +22,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
             var containers = new List<ContainerElement>();
             var lines = markdown.Split('\n');
 
-            ContainerElement currentContainer = new ContainerElement(ContainerElementStyle.Stacked);
+            ContainerElement currentContainer = new ContainerElement(ContainerElementStyle.Stacked | ContainerElementStyle.Wrapped);
             List<ClassifiedTextElement> currentElements = new List<ClassifiedTextElement>();
 
             for (int i = 0; i < lines.Length; i++)
@@ -44,7 +46,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
                     i++;
                     while (i < lines.Length && !lines[i].StartsWith("```"))
                     {
-                        codeBlock.Append(lines[i]);
+                        codeBlock.AppendLine(lines[i].TrimEnd());
                         i++;
                     }
 

@@ -19,7 +19,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal.Tests
         {
             string text = "<div hx-get=\"\">Hello</div>";
             SetupMockSnapshot(text);
-            var point = new SnapshotPoint(_mockSnapshot.Object, 12); // Position after '"'
+            var point = new SnapshotPoint(_mockSnapshot.Object, 13); // Cursor position after first '"'
 
             // Act
             bool result = SnapshotPointExtensions.IsInsideHxAttribute(point, out string attribute);
@@ -34,7 +34,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal.Tests
         {
             string text = "<div hx-get=\"/url\">Hello</div>";
             SetupMockSnapshot(text);
-            var point = new SnapshotPoint(_mockSnapshot.Object, 12); // Position after '"'
+            var point = new SnapshotPoint(_mockSnapshot.Object, 13); // Cursor position after first '"'
 
             // Act
             bool result = SnapshotPointExtensions.IsInsideHxAttribute(point, out string attribute);

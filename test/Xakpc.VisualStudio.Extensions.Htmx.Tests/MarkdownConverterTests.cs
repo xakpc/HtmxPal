@@ -19,7 +19,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal.Tests
         {
             var result = _converter.Convert("This is a simple paragraph.");
             Assert.AreEqual(1, result.Count);
-            Assert.AreEqual(ContainerElementStyle.Wrapped, result[0].Style);
+            Assert.AreEqual(ContainerElementStyle.Stacked | ContainerElementStyle.Wrapped, result[0].Style);
             Assert.AreEqual(1, result[0].Elements.Count());
             Assert.AreEqual(1, (result[0].Elements.First() as ClassifiedTextElement).Runs.Count());
             Assert.AreEqual("text", (result[0].Elements.First() as ClassifiedTextElement).Runs.ElementAt(0).ClassificationTypeName);
@@ -70,6 +70,26 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal.Tests
             Assert.AreEqual("Here's a code block:", (elements[0] as ClassifiedTextElement).Runs.First().Text);
             Assert.AreEqual("markup node", (elements[1] as ClassifiedTextElement).Runs.First().ClassificationTypeName);
             Assert.AreEqual("var x = 5;\r\nconsole.log(x);", (elements[1] as ClassifiedTextElement).Runs.First().Text);
+        }
+
+        [TestMethod]
+        public void CodeBlockWithType_Convert_ProperlyConverted()
+        {
+            List<ContainerElement> result = _converter.Convert("""
+                Here's a code block:
+                ```html
+                <button hx-post="/example" hx-ext="debug, json-enc">
+                  This Button Uses Two Extensions
+                </button>
+                ```
+                """);
+            Assert.AreEqual(1, result.Count);
+            Assert.AreEqual(2, result[0].Elements.Count());
+            var elements = result[0].Elements.ToList();
+            Assert.AreEqual("text", (elements[0] as ClassifiedTextElement).Runs.First().ClassificationTypeName);
+            Assert.AreEqual("Here's a code block:", (elements[0] as ClassifiedTextElement).Runs.First().Text);
+            Assert.AreEqual("markup node", (elements[1] as ClassifiedTextElement).Runs.First().ClassificationTypeName);
+            Assert.AreEqual("<button hx-post=\"/example\" hx-ext=\"debug, json-enc\">\r\n  This Button Uses Two Extensions\r\n</button>", (elements[1] as ClassifiedTextElement).Runs.First().Text);
         }
 
         [TestMethod]
