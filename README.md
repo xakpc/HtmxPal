@@ -61,8 +61,8 @@
 
 ![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/blob/master/resources/screenshot.PNG)
 
-htmx-pal is a non-official Visual Studio extension that enhances your development experience when working with HTMX in Visual Studio 2019 and 2022. 
-It provides code completion and quick info (IntelliSense) features for htmx attributes, making it easier to write and understand htmx-powered web applications.
+htmx-pal is a non-official Visual Studio extension that enhances your development experience when working with htmx in Visual Studio 2019 and 2022. 
+It provides code completion and quick info (IntelliSense) features for htmx attributes, making writing and understanding htmx-powered web applications easier.
 
 ### Key Features
 
