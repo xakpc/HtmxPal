@@ -17,8 +17,10 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     [Export(typeof(IAsyncCompletionCommitManagerProvider))]
     [Name("htmx completion commit manager")]
     [ContentType("html")]
-    [ContentType("htmlx")] // .html
-    [ContentType("Razor")] // .cshtml
+    [ContentType("htmlx")]
+    [ContentType("html-delegation")] // VS 2022
+    [ContentType("razor")]
+    [ContentType("LegacyRazorCSharp")] // VS 2022
     internal class HtmxCompletionCommitManagerProvider : IAsyncCompletionCommitManagerProvider
     {
         private readonly Lazy<HtmxCompletionCommitManager> Manager = new Lazy<HtmxCompletionCommitManager>(() => new HtmxCompletionCommitManager());
@@ -83,7 +85,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
                 }
 
                 // Move the caret inside the quotes
-                var newPosition = span.GetStartPoint(buffer.CurrentSnapshot).Position + item.InsertText.IndexO ( 1;
+                var newPosition = span.GetStartPoint(buffer.CurrentSnapshot).Position + item.InsertText.Length - 1;
                 session.TextView.Caret.MoveTo(new SnapshotPoint(buffer.CurrentSnapshot, newPosition));
 
                 Output.WriteInfo("HtmxCompletionCommitManager:TryCommit: committed completion.");

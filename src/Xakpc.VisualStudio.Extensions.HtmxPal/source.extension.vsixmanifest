@@ -12,9 +12,9 @@ Enhance your HTMX development workflow with advanced code completion and quick i
 - Adaptive suggestions based on document structure
 
 Optimize your development process and craft HTMX-powered applications with increased efficiency. Suitable for developers at all proficiency levels working with HTMX technology.</Description>
-        <Icon>Resources\HtmxIcon.png</Icon>
-        <PreviewImage>Resources\HtmxIcon.png</PreviewImage>
-        <Tags>razor,htmx</Tags>
+        <Icon>Resources\htmx-icon.png</Icon>
+        <PreviewImage>Resources\htmx-icon.png</PreviewImage>
+        <Tags>htmx, html, cshtml, razor, blazor, intellisense, auto-completion</Tags>
     </Metadata>
     <Installation>
         <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[16.0, 18.0)">

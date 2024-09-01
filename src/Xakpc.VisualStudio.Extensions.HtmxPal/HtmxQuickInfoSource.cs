@@ -19,7 +19,9 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     [Name("htmx tooltip quickInfo source")]
     [ContentType("html")]
     [ContentType("htmlx")]
-    [ContentType("razor")]    
+    [ContentType("html-delegation")] // VS 2022
+    [ContentType("razor")]
+    [ContentType("LegacyRazorCSharp")] // VS 2022
     internal class HtmxQuickInfoSourceProvider : IAsyncQuickInfoSourceProvider
     {
         [Import]
@@ -114,7 +116,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
                 return (null, null);
             }
 
-            Output.WriteInfo("HtmxQuickInfoSource:AugmentQuickInfoSessionAsync: searchText=" + searchText);
+            Output.WriteInfo("HtmxQuickInfoSource:BuildQuickInfoElementsAsync: searchText=" + searchText);
 
             if (ToolTipsProvider.Instance.TryGetValue(searchText, out var value))
             {

@@ -69,7 +69,6 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal.Services
                 return list.Select(x => x.Key).ToImmutableList();
             }
 
-            Output.WriteWarining($"AttributeToolTipsProvider.GetKeywords: key '{key}' not found.");
             return null;
         }
 

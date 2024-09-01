@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion;
+﻿using Microsoft.VisualStudio.Core.Imaging;
+using Microsoft.VisualStudio.Imaging;
+using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion;
 using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Adornments;
@@ -21,7 +23,9 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     [Name("htmx attribute completion source")]
     [ContentType("html")]
     [ContentType("htmlx")]
-    [ContentType("Razor")]
+    [ContentType("html-delegation")] // VS 2022
+    [ContentType("razor")]
+    [ContentType("LegacyRazorCSharp")] // VS 2022
     [Order(After = "htmx completion source")]
     internal class HtmxAttributeCompletionSourceProvider : IAsyncCompletionSourceProvider
     {
@@ -44,6 +48,8 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     /// </summary>  
     internal class HtmxAttributesCompletionSource : IAsyncCompletionSource
     {
+        private static ImageElement CompletionItemIcon = new ImageElement(KnownMonikers.Enumeration.ToImageId(), "htmx-attribute");
+
         /// <summary>  
         /// Gets the completion context asynchronously.  
         /// </summary>  
@@ -131,7 +137,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
                             automationText: text,
                             source: this,
                             filters: ImmutableArray<CompletionFilter>.Empty,
-                            icon: default,
+                            icon: CompletionItemIcon,
                             suffix: default,
                             attributeIcons: ImmutableArray<ImageElement>.Empty);
         }

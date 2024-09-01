@@ -42,9 +42,8 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal.Services
         /// </summary>
         /// <param name="key">The key of the attribute.</param>
         /// <param name="element">When this method returns, contains the tooltip content if the key was found; otherwise, null.</param>
-        /// <param name="useLink">Specifies whether to include a link to the HTMX documentation.</param>
         /// <returns><c>true</c> if the key was found; otherwise, <c>false</c>.</returns>
-        public bool TryGetValue(string key, out ContainerElement element, bool useLink = true)
+        public bool TryGetValue(string key, out ContainerElement element)
         {
             if (_cachedDictionary.TryGetValue(key, out element))
             {
@@ -57,9 +56,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal.Services
                 if (Keywords.Contains(key))
                 {
                     var markdown = File.ReadAllText(path);
-                    element = useLink ?
-                        ContainerElementHelper.CreateRichContent(markdown, $"https://htmx.org/attributes/{key}/") :
-                        ContainerElementHelper.CreateRichContent(markdown);
+                    element = ContainerElementHelper.CreateRichContent(markdown, $"https://htmx.org/attributes/{key}/");
                     _cachedDictionary.TryAdd(key, element);
                     return true;
                 }

@@ -15,7 +15,9 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     [Name("htmx tooltip quickinfo controller")]
     [ContentType("html")]
     [ContentType("htmlx")]
+    [ContentType("html-delegation")] // VS 2022
     [ContentType("razor")]
+    [ContentType("LegacyRazorCSharp")] // VS 2022
     internal class HtmxQuickInfoControllerProvider : IIntellisenseControllerProvider
     {
         /// <summary>

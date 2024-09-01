@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.Language.Intellisense.AsyncCompletion.Data;
 using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Adornments;
+using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
 using System;
@@ -24,7 +25,9 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     [Name("htmx completion source")]
     [ContentType("html")]
     [ContentType("htmlx")]
-    [ContentType("Razor")]
+    [ContentType("html-delegation")] // VS 2022
+    [ContentType("razor")]
+    [ContentType("LegacyRazorCSharp")] // VS 2022
     internal class HtmxCompletionSourceProvider : IAsyncCompletionSourceProvider
     {
         private readonly Lazy<HtmxCompletionSource> Source = new Lazy<HtmxCompletionSource>(() => new HtmxCompletionSource());
@@ -46,10 +49,6 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
     /// </summary>
     internal class HtmxCompletionSource : IAsyncCompletionSource
     {
-        // CompletionItem takes array of CompletionFilters.
-        static CompletionFilter Filter = new CompletionFilter("htmx", "hx", CompletionItemIcon);
-        static ImmutableArray<CompletionFilter> Filters = ImmutableArray.Create(Filter);
-
         // Icon
         private static ImageElement CompletionItemIcon = new ImageElement(KnownMonikers.HTMLEndTag.ToImageId(), "htmx");
 
@@ -80,7 +79,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
         /// <returns>A task that represents the asynchronous operation. The task result contains the description of the completion item.</returns>
         public Task<object> GetDescriptionAsync(IAsyncCompletionSession session, CompletionItem item, CancellationToken token)
         {
-            if (ToolTipsProvider.Instance.TryGetValue(item.DisplayText, out var element, false))
+            if (ToolTipsProvider.Instance.TryGetValue(item.DisplayText, out var element))
             {
                 // add some spacing between text paragraphs (should really cache that as well)
                 var elements = element.Elements.ToList();
@@ -144,7 +143,7 @@ namespace Xakpc.VisualStudio.Extensions.HtmxPal
                             filterText: text,
                             automationText: text,
                             source: this,
-                            filters: Filters,
+                            filters: ImmutableArray<CompletionFilter>.Empty,
                             icon: CompletionItemIcon,
                             suffix: default,
                             attributeIcons: ImmutableArray<ImageElement>.Empty);

@@ -6,7 +6,7 @@ The `hx-target` attribute allows you to target a different element for swapping 
 - `find <CSS selector>` which will find the first child descendant element that matches the given CSS selector. 
 - `next` which resolves to `element.nextElementSibling` 
 - `next <CSS selector>` which will scan the DOM forward for the first element that matches the given CSS selector. (e.g. next .error will target the closest following sibling element with error class) 
-- previous which resolves to `element.previousElementSibling`
+- `previous` which resolves to `element.previousElementSibling`
 - `previous <CSS selector>` which will scan the DOM backwards for the first element that matches the given CSS selector. (e.g previous .error will target the closest previous sibling with error class)
 
 Here is an example that targets a div:
