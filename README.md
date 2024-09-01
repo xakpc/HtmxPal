@@ -7,6 +7,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![MIT License][license-shield]][license-url]
 [![VS Marketplace Downloads][vsm-shield]][vsm-url]
+[![Rate it][vsmrating-shield]][vsmrating-url]
 
 </div>
 
@@ -169,7 +170,9 @@ Project Link: [https://github.com/xakpc/htmx-pal](https://github.com/xakpc/HtmxP
 [stars-url]: https://github.com/xakpc/HtmxPal/stargazers
 [license-shield]: https://img.shields.io/github/license/xakpc/HtmxPal?style=for-the-badge
 [license-url]: https://github.com/xakpc/HtmxPal/blob/master/LICENSE.txt
-[vsm-shield]: https://img.shields.io/visual-studio-marketplace/d/xakpc.HtmxPal?style=for-the-badge&logo=visualstudio
+[vsm-shield]: https://img.shields.io/visual-studio-marketplace/i/xakpc.htmx-pal?style=for-the-badge&logo=visualstudio
 [vsm-url]: https://marketplace.visualstudio.com/items?itemName=xakpc.htmx-pal
+[vsmrating-shield]: https://img.shields.io/visual-studio-marketplace/stars/xakpc.htmx-pal?style=for-the-badge&logo=visualstudio
+[vsmrating-url]:https://marketplace.visualstudio.com/items?itemName=xakpc.htmx-pal&ssr=false#review-details
 [actions-shield]: https://img.shields.io/github/actions/workflow/status/xakpc/HtmxPal/build.yml?style=for-the-badge&logo=github
 [actions-url]: https://github.com/xakpc/HtmxPal/actions
