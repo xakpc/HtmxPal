@@ -170,7 +170,7 @@ Project Link: [https://github.com/xakpc/htmx-pal](https://github.com/xakpc/HtmxP
 [stars-url]: https://github.com/xakpc/HtmxPal/stargazers
 [license-shield]: https://img.shields.io/github/license/xakpc/HtmxPal?style=for-the-badge
 [license-url]: https://github.com/xakpc/HtmxPal/blob/master/LICENSE.txt
-[vsm-shield]: https://img.shields.io/visual-studio-marketplace/i/xakpc.htmx-pal?style=for-the-badge&logo=visualstudio
+[vsm-shield]: https://img.shields.io/visual-studio-marketplace/i/xakpc.htmx-pal?style=for-the-badge&logo=visualstudio&color=blue
 [vsm-url]: https://marketplace.visualstudio.com/items?itemName=xakpc.htmx-pal
 [vsmrating-shield]: https://img.shields.io/visual-studio-marketplace/stars/xakpc.htmx-pal?style=for-the-badge&logo=visualstudio
 [vsmrating-url]:https://marketplace.visualstudio.com/items?itemName=xakpc.htmx-pal&ssr=false#review-details
