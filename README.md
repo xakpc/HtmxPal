@@ -70,11 +70,11 @@ It provides code completion and quick info (IntelliSense) features for htmx attr
 
 #### **Code Completion:** Get suggestions for htmx attributes as you type.
 
-![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/blob/master/resources/code-completion-1.gif)
+![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/blob/master/resources/code-completion-2.gif)
 
 #### **Attribute Code Completion:** Get possible values for some attributes with .
 
-![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/blob/master/resources/code-completion-2.gif)
+![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/blob/master/resources/code-completion-1.gif)
 
 #### **Quick Info:** Hover over htmx attributes to see detailed information and usage tips.
 
