@@ -2,7 +2,7 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="Xakpc.VisualStudio.Extensions.HtmxPal.1c639a19-278c-4234-9b63-bc96ec0dec69" Version="1.0" Language="en-US" Publisher="Pavel Osadchuk" />
-        <DisplayName>htmx-pal code completion and intellisense</DisplayName>
+        <DisplayName>htmx-pal: code completion and intellisense</DisplayName>
         <Description xml:space="preserve">htmx-pal is a non-official Visual Studio extension that enhances your development experience when working with htmx in Visual Studio 2022. It provides code completion and quick info (IntelliSense) features for htmx attributes, making writing and understanding htmx-powered web applications easier.</Description>
         <MoreInfo>https://github.com/xakpc/HtmxPal/</MoreInfo>
         <License>LICENSE.txt</License>
