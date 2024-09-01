@@ -2,16 +2,12 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
         <Identity Id="Xakpc.VisualStudio.Extensions.HtmxPal.1c639a19-278c-4234-9b63-bc96ec0dec69" Version="1.0" Language="en-US" Publisher="Pavel Osadchuk" />
-        <DisplayName>HtmxPal</DisplayName>
-        <Description xml:space="preserve">HTMX Developer Tools
-
-Enhance your HTMX development workflow with advanced code completion and quick information features. This extension augments Visual Studio Code with:
-
-- Intelligent autocompletion for HTMX attributes and values
-- Contextual quick info tooltips for HTMX syntax
-- Adaptive suggestions based on document structure
-
-Optimize your development process and craft HTMX-powered applications with increased efficiency. Suitable for developers at all proficiency levels working with HTMX technology.</Description>
+        <DisplayName>htmx-pal</DisplayName>
+        <Description xml:space="preserve">htmx-pal is a non-official Visual Studio extension that enhances your development experience when working with htmx in Visual Studio 2019 and 2022. It provides code completion and quick info (IntelliSense) features for htmx attributes, making writing and understanding htmx-powered web applications easier.</Description>
+        <MoreInfo>https://github.com/xakpc/HtmxPal/</MoreInfo>
+        <License>LICENSE.txt</License>
+        <GettingStartedGuide>https://github.com/xakpc/HtmxPal/blob/master/GETTING-STARTED.md</GettingStartedGuide>
+        <ReleaseNotes>https://github.com/xakpc/HtmxPal/blob/master/CHANGELOG.md</ReleaseNotes>
         <Icon>Resources\htmx-icon.png</Icon>
         <PreviewImage>Resources\htmx-icon.png</PreviewImage>
         <Tags>htmx, html, cshtml, razor, blazor, intellisense, auto-completion</Tags>
