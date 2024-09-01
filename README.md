@@ -154,7 +154,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 Pavel - [@xakpc](https://twitter.com/xakpc)
 
-Project Link: [https://github.com/xakpc/htmx-pal](https://github.com/xakpc/htmx-pal)
+Project Link: [https://github.com/xakpc/htmx-pal](https://github.com/xakpc/HtmxPal)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
