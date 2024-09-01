@@ -4,7 +4,7 @@ To get htmx-pal up and running in your Visual Studio environment, follow these s
 
 ## Prerequisites
 
-- Visual Studio 2019 or Visual Studio 2022
+- Visual Studio 2022
 
 ## Installation
 
