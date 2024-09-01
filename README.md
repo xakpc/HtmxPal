@@ -29,7 +29,7 @@
     ·
     <a href="https://github.com/xakpc/HtmxPal/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
     ·
-    <a href="https://xakpc.info">Read Article</a>
+    <a href="https://xakpc.info/extending-visual-studio-2022">Read Article</a>
   </p>
 </div>
 
@@ -106,7 +106,7 @@ To get htmx-pal up and running in your Visual Studio environment, follow these s
 4. Click "Download"
 5. Restart Visual Studio to complete the installation
 
-Alternatively, you can download the VSIX file directly from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=xakpc.HtmxPal).
+Alternatively, you can download the VSIX file directly from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=xakpc.htmx-pal).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -170,6 +170,6 @@ Project Link: [https://github.com/xakpc/htmx-pal](https://github.com/xakpc/HtmxP
 [license-shield]: https://img.shields.io/github/license/xakpc/HtmxPal?style=for-the-badge
 [license-url]: https://github.com/xakpc/HtmxPal/blob/master/LICENSE.txt
 [vsm-shield]: https://img.shields.io/visual-studio-marketplace/d/xakpc.HtmxPal?style=for-the-badge&logo=visualstudio
-[vsm-url]: https://marketplace.visualstudio.com/items?itemName=xakpc.HtmxPal
+[vsm-url]: https://marketplace.visualstudio.com/items?itemName=xakpc.htmx-pal
 [actions-shield]: https://img.shields.io/github/actions/workflow/status/xakpc/HtmxPal/build.yml?style=for-the-badge&logo=github
 [actions-url]: https://github.com/xakpc/HtmxPal/actions
