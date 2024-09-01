@@ -13,7 +13,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/xakpc/htmx-pal/">
+  <a href="https://github.com/xakpc/HtmxPal/">
     <img src="resources/htmx-icon.png" alt="Logo" width="150" height="150">
   </a>
 
@@ -25,9 +25,9 @@
     <a href="#getting-started"><strong>Start here »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/xakpc/htmx-pal/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/xakpc/HtmxPal/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/xakpc/htmx-pal/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/xakpc/HtmxPal/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
@@ -59,7 +59,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![htmx-pal Extension Screenshot](https://github.com/xakpc/htmx-pal/resources/screenshot.png)
+![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/resources/screenshot.png)
 
 htmx-pal is a non-official Visual Studio extension that enhances your development experience when working with HTMX in Visual Studio 2019 and 2022. 
 It provides code completion and quick info (IntelliSense) features for htmx attributes, making it easier to write and understand htmx-powered web applications.
@@ -68,15 +68,15 @@ It provides code completion and quick info (IntelliSense) features for htmx attr
 
 #### **Code Completion:** Get suggestions for htmx attributes as you type.
 
-![htmx-pal Extension Screenshot](https://github.com/xakpc/htmx-pal/resources/code-completion-1.gif)
+![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/resources/code-completion-1.gif)
 
 #### **Attribute Code Completion:** Get possible values for some attributes with .
 
-![htmx-pal Extension Screenshot](https://github.com/xakpc/htmx-pal/resources/code-completion-2.gif)
+![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/resources/code-completion-2.gif)
 
 #### **Quick Info:** Hover over htmx attributes to see detailed information and usage tips.
 
-![htmx-pal Extension Screenshot](https://github.com/xakpc/htmx-pal/resources/intelli-sense-1.gif)
+![htmx-pal Extension Screenshot](https://github.com/xakpc/HtmxPal/resources/intelli-sense-1.gif)
 
 **Support for VS 2019 and 2022:** Compatible with both Visual Studio 2019 and 2022.
 
@@ -165,11 +165,11 @@ Project Link: [https://github.com/xakpc/htmx-pal](https://github.com/xakpc/htmx-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[stars-shield]: https://img.shields.io/github/stars/xakpc/htmx-pal.svg?style=for-the-badge
-[stars-url]: https://github.com/xakpc/htmx-pal/stargazers
-[license-shield]: https://img.shields.io/github/license/xakpc/htmx-pal?style=for-the-badge
-[license-url]: https://github.com/xakpc/htmx-pal/blob/master/LICENSE.txt
+[stars-shield]: https://img.shields.io/github/stars/xakpc/HtmxPal.svg?style=for-the-badge
+[stars-url]: https://github.com/xakpc/HtmxPal/stargazers
+[license-shield]: https://img.shields.io/github/license/xakpc/HtmxPal?style=for-the-badge
+[license-url]: https://github.com/xakpc/HtmxPal/blob/master/LICENSE.txt
 [vsm-shield]: https://img.shields.io/visual-studio-marketplace/d/xakpc.HtmxPal?style=for-the-badge&logo=visualstudio
 [vsm-url]: https://marketplace.visualstudio.com/items?itemName=xakpc.HtmxPal
-[actions-shield]: https://img.shields.io/github/actions/workflow/status/xakpc/htmx-pal/build.yml?style=for-the-badge&logo=github
-[actions-url]: https://github.com/xakpc/htmx-pal/actions
+[actions-shield]: https://img.shields.io/github/actions/workflow/status/xakpc/HtmxPal/build.yml?style=for-the-badge&logo=github
+[actions-url]: https://github.com/xakpc/HtmxPal/actions
